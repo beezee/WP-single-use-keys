@@ -13,6 +13,7 @@ Create a non-expiring single use key and do something with it
     ?>
     
 Consume a key later
+
     <?php
         add\_action('init', 'consume_key');
         
