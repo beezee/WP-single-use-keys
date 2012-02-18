@@ -17,6 +17,7 @@ class SingleUseKey
     private $_invalid_message;
     private $_expired_message;
     private $_stored_keys;
+    public $key;
     public $settings;
     public $stored_keys;
     public $load_override = false;
@@ -31,19 +32,21 @@ class SingleUseKey
             'expires' => 'never',
             'invalid_message' => 'Sorry, looks like this is an invalid key',
             'expired_message' => 'Sorry, looks like this key has expired');
-        $link_options = (is_array($options)) ? array_merge($default_options, $options) : $default_options;
-        $this->_key = md5(time().$link_options['secret']);
-        $link_options['key'] = $this->_key;
-        $this->_expires = ($link_options['expires'] == 'never') ? $link_options['expires'] : $this->_set_expiration($link_options['expires']);
+        $key_options = (is_array($options)) ? array_merge($default_options, $options) : $default_options;
+        $this->_key = md5(microtime().$key_options['secret']);
+        $this->key = $this->_key;
+        $key_options['key'] = $this->_key;
+        $this->_expires = ($key_options['expires'] == 'never') ? $key_options['expires'] : $this->_set_expiration($key_options['expires']);
         if ( is_wp_error($this->_expires) ) return $this->_expires;
-        $this->settings = $link_options;
-        foreach($link_options as $option_name => $option_value)
+        $this->settings = $key_options;
+        $this->settings['expires'] = $this->_expires;
+        foreach($key_options as $option_name => $option_value)
         {
             if ($option_name == 'secret' or $option_name == 'store' or $option_name == 'expires') continue;
             $keyname = '_'.$option_name;
             $this->$keyname = $option_value;
         }
-        if ($link_params['store']) $this->store();
+        if ($key_options['store']) $this->store();
     }
     
     private function _set_expiration($expires)
@@ -65,26 +68,28 @@ class SingleUseKey
         if (!is_array($this->_stored_keys)) $this->_stored_keys = array();
     }
     
-    public function store()
+    public function store($add_self=true)
     {
-        $this->_stored_keys[$this->_key] = $this;
-        do_action('store_single_use_key', $this->_stored_keys, $this);
+        if ($add_self) $this->_stored_keys[$this->_key] = $this->settings;
+        $store = $this->_stored_keys;
+        do_action('store_single_use_key', $store, $this);
         if ($this->store_override) return;
-        update_option('bz_single_use_keys', $this->_stored_keys);
+        update_option('bz_single_use_keys', $store);
     }
     
     public function validate($key)
     {
+        if (!isset($this->_stored_keys[$key])) return $this->_invalid_message;
         $stored_key = $this->_stored_keys[$key];
-        if (!$stored_key) return $this->_invalid_message;
-        if ($stored_key->settings->expires != 'never' and $stored_key->settings->expires - time() <= 0) return $stored_key->settings->expired_message;
+        if ($stored_key['expires'] != 'never' and $stored_key['expires'] - time() <= 0) return $stored_key['expired_message'];
         return 'valid';
     }
     
     public function consume($key)
     {
-        $foundKey = $this->validate();
-        unset($this->_stored_keys[$key]);
-        $this->store();
+        $foundKey = $this->validate($key);
+        if (isset($this->_stored_keys[$key])) unset($this->_stored_keys[$key]);
+        $this->store(false);
+        return $foundKey;
     }
 }
