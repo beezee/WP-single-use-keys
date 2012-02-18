@@ -8,12 +8,12 @@ single use, and optionally expiring keys (generally for use in links) to provide
 Create a non-expiring single use key and do something with it
     <?php
         $key = new SingleUseKey();
-        wp_mail('email@address.com', 'Email subject', 'Here is your one time link - http://www.mysite.com?key='.$key->key);
+        wp\_mail('email@address.com', 'Email subject', 'Here is your one time link - http://www.mysite.com?key='.$key->key);
     ?>
     
 Consume a key later
     <?php
-        add_action('init', 'consume_key');
+        add\_action('init', 'consume_key');
         
         function consume_key()
         {
@@ -51,12 +51,12 @@ a key, like so:
 ###expires
 
 Sets optional expiration time of the key. Defaults to never. To specify an expiration, pass in a valid string accepted by PHP's [strtotime](http://php.net/manual/en/function.strtotime.php)
-If the string is not parsable, the key will not be created, and a WP_Error object will be returned. The code below attempts to set an expiration 3 days from now, and
+If the string is not parsable, the key will not be created, and a WP\_Error object will be returned. The code below attempts to set an expiration 3 days from now, and
 if the expriation string is not parsable will then create a key with no expiration.
 
     <?php
         $key = new SingleUseKey(array('expires' => '3 days'));
-        if if ( is_wp_error($key) ) $key = new SingleUseKey();
+        if if ( is\_wp\_error($key) ) $key = new SingleUseKey();
     ?>
     
 ###invalid_message
@@ -65,8 +65,8 @@ Sets the message that will be returned when attempting to validate or consume an
 how you would display a custom message if a key is invalid:
 
     <?php
-        $key = $_GET['key'];
-        $consumer = new SingleUseKey(array('store' => false, 'invalid_message' => 'Slow down sparky! That's not a legit key...'));
+        $key = $\_GET['key'];
+        $consumer = new SingleUseKey(array('store' => false, 'invalid\_message' => 'Slow down sparky! That's not a legit key...'));
         $valid = $consumer->consume($key); //$valid now equals 'Slow down sparky! etc etc'
     ?>
     
@@ -76,13 +76,13 @@ Sets the message that will be returned when attempting to validate or consume a 
 how you would set a custom expiration message when storing a new key:
 
     <?php
-        $key = new SingleUseKey(array('expires' => 'tomorrow', 'expired_message' => 'Yo slowsky! This key is mad old... maybe try getting a new one?'));
+        $key = new SingleUseKey(array('expires' => 'tomorrow', 'expired\_message' => 'Yo slowsky! This key is mad old... maybe try getting a new one?'));
     ?>
     
 If the following code was run to consume this key 2 days later:
 
     <?php
-        $key = $_GET['key'];
+        $key = $\_GET['key'];
         $consumer = new $SingleUseKey(array('store' => false));
         $valid = $consumer->consume($key);
     ?>
@@ -93,14 +93,14 @@ $valid would now equal 'Yo slowsky! etc etc'
 
 In case you want to use your own storage methods or do any additional processing during storage and loading of your keys, two action hooks are available.
 
-###load_stored_single_use_keys
+###load\_stored\_single\_use\_keys
 
 This action is fired before the stored keys are loaded into memory by a consumer or validator. If you've changed the storage for your keys this is where you would read from your new storage location and ensure the data is formatted to be readable
-by the plugin. Setting the stored_keys property on the key object passed to this hook will automatically override the plugins default loading behavior.
+by the plugin. Setting the stored\_keys property on the key object passed to this hook will automatically override the plugins default loading behavior.
 Here's an example of loading the stored keys from a global variable:
 
     <?php
-        add_action('load_stored_single_use_keys', 'load_keys_from_global');
+        add\_action('load_stored_single_use_keys', 'load\_keys\_from\_global');
         
         function load_keys_from_global($key_obj)
         {
@@ -109,7 +109,7 @@ Here's an example of loading the stored keys from a global variable:
         }
     ?>
     
-###store_single_use_keys
+###store\_single\_use\_keys
 
 This action is fired right before the plugins default storage behavior. By default the custom storage method will be run *in addition* to the default storage method. To override the default storage behavior, set the storage_override property to true
 on the key object passed to the hook function. The code below will do just that, and store keys in the same global variable referenced in the custom load example above. While this does not offer much in the way of persistence,
