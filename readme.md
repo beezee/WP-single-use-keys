@@ -142,7 +142,7 @@ This method stores the current key. If you need to do additional processing with
 
 ###consume
 
-This method accepts a key string and returns one of three string values: 'valid', invalid_message (as described above), or expired_message (as described above). If the key string matches a valid stored key, that key is removed
+This method accepts a key string and returns one of three string values: 'valid', invalid_message (as defined in options), or expired_message (as defined in options). If the key string matches a valid stored key, that key is removed
 from storage and will no longer be usable.
 
     <?php
