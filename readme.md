@@ -116,3 +116,14 @@ Here's an example of loading the stored keys from a global variable:
 This action is fired right before the plugins default storage behavior. By default the custom storage method will be run *in addition* to the default storage method. To override the default storage behavior, set the storage_override property to true
 on the key object passed to the hook function. The code below will do just that, and store keys in the same global variable referenced in the custom load example above. While this does not offer much in the way of persistence,
 this code example along with the previous do comprise a fully functional demonstration of custom storage and retreival of keys.
+
+    <?php
+        add_action('store_single_use_keys', 'store_keys_in_global', 10 , 2);
+        
+        function store_keys_in_global($stored, $key_obj)
+        {
+            global $stored_keys;
+            $stored_keys = $stored;
+            $key_obj->store_override = true;
+        }
+    ?>
