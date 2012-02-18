@@ -1,4 +1,4 @@
-#WP Single Use Links
+#WP Single Use Keys
 
 One of those things that you don't want to code twice, so here's a plugin that takes care of it once and for all. Provides you with a class to easily generate
 single use, and optionally expiring keys (generally for use in links) to provide to visitors or registered users of your site.
