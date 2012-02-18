@@ -58,7 +58,7 @@ if the expriation string is not parsable will then create a key with no expirati
 
     <?php
         $key = new SingleUseKey(array('expires' => '3 days'));
-        if if ( is_wp_error($key) ) $key = new SingleUseKey();
+        if ( is_wp_error($key) ) $key = new SingleUseKey();
     ?>
     
 ###invalid_message
