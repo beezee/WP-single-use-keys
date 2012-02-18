@@ -183,7 +183,6 @@ function load_keys_from_global($key_obj)
 {
     global $stored_keys;
     $key_obj->stored_keys = $stored_keys;
-    //echo '<pre>'.print_r($stored_keys, true).'</pre>';
 }
 
 function store_keys_in_global($stored, $key_obj)
