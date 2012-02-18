@@ -19,8 +19,7 @@ class SingleUseKey
     private $_stored_keys;
     public $key;
     public $settings;
-    public $stored_keys;
-    public $load_override = false;
+    public $stored_keys = false;
     public $store_override = false;  
     
     public function __construct($options = array())
@@ -58,8 +57,8 @@ class SingleUseKey
     
     private function _load_stored_keys()
     {
-        do_action('load_stored_keys', $this);
-        if ($this->load_override)
+        do_action('load_stored_single_use_keys', $this);
+        if ($this->stored_keys)
         {
             $this->_stored_keys = $this->stored_keys;
             return;
@@ -72,7 +71,7 @@ class SingleUseKey
     {
         if ($add_self) $this->_stored_keys[$this->_key] = $this->settings;
         $store = $this->_stored_keys;
-        do_action('store_single_use_key', $store, $this);
+        do_action('store_single_use_keys', $store, $this);
         if ($this->store_override) return;
         update_option('bz_single_use_keys', $store);
     }
