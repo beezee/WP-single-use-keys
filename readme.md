@@ -6,6 +6,7 @@ single use, and optionally expiring keys (generally for use in links) to provide
 ##Basic Usage
 
 Create a non-expiring single use key and do something with it
+
     <?php
         $key = new SingleUseKey();
         wp\_mail('email@address.com', 'Email subject', 'Here is your one time link - http://www.mysite.com?key='.$key->key);
