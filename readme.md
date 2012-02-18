@@ -127,3 +127,35 @@ this code example along with the previous do comprise a fully functional demonst
             $key_obj->store_override = true;
         }
     ?>
+    
+##Methods
+
+###store
+
+This method stores the current key. If you need to do additional processing with a key before storing, you can instantiate with the store option set to false, and then store when ready by calling the method, as follows:
+
+    <?php
+        $key = new SingleUseKey(array('store' => false));
+        //do additional stuff with key
+        $key->store();
+    ?>
+
+###consume
+
+This method accepts a key string and returns one of three string values: 'valid', invalid_message (as described above), or expired_message (as described above). If the key string matches a valid stored key, that key is removed
+from storage and will no longer be usable.
+
+    <?php
+        $key = $_GET['key'];
+        $consumer = new SingleUseKey(array('store' => false));
+        $valid = $consumer->consume($key); //if key string matches a stored key, $valid equals 'valid', and the key has been removed from storage, and cannot be used again
+    ?>
+
+###validate
+
+This method accepts a key string, and returns any of the same three values returned by the consume method, however no further processing is done beyond this. The key is left in storage and can be validated again, or consumed at a later time.
+
+    <?php
+        $key = $_GET['key'];
+        $validator = new SingleUseKey(array('store' => false));
+        $valid = $validator->validate($key); //if key string matches a stored key, $valid equals 'valid', and the key remains in storage and can be used again, or consumed at a later time.
