@@ -26,7 +26,7 @@ function bz_single_use_link_process()
                         action : 'process_single_use_link_demo_form',
                         email : $('#single_use_key_demo_email').val()
                     }
-                    $.post('<?php echo get_bloginfo('admin_url'); ?>/admin-ajax.php', data, function(response) {
+                    $.post('<?php echo get_bloginfo('url'); ?>/wp-admin/admin-ajax.php', data, function(response) {
                         alert('Thanks! Check your email for an email with subject "Your single use link..." - maybe even check your spam folder too.');
                     })
                 });
