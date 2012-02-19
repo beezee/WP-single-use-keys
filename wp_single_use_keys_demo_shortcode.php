@@ -15,7 +15,7 @@ add_action('wp_head', 'bz_single_use_link_process', 99);
 function bz_single_use_link_process()
 {
     ?>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript">
         jQuery('document').ready(function($) {
            if ($('#single_use_key_demo_form_submit').length) {
