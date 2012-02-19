@@ -164,3 +164,8 @@ This method accepts a key string, and returns any of the same three values retur
 
 I've included a demo plugin in wp_single_use_keys_demo_shortcode.php. It's important to be aware that the overall implementation of this demo plugin is *very* quick and dirty, and in no way reflects overall WP plugin best practices, however
 lines 36 to 58 of the plugin clearly demonstrate how to utilize the single use keys class to generate one time use expiring links in just a few lines of code. You can see it in action [here](http://brianzeligson.com/single_use_keys/)
+
+##A note on tests
+
+The test suite works on a live WP database, so you shouldn't run it on a live site. Chances are it will need to be configured to work, however if it does work, running it on a live site will clear any stored single use keys you may have in the
+options table.
