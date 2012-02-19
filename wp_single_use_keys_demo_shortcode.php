@@ -41,7 +41,7 @@ function bz_single_use_link_process()
         if ($valid == 'valid') $valid = 'Hey good work! That key has been consumed and this link won\'t work again';
         ?>
         <script type="text/javascript">
-            alert('<?php echo $valid; ?>');
+            alert("<?php echo $valid; ?>");
         </script>
         <?php
     }
