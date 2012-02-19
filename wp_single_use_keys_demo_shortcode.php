@@ -57,7 +57,7 @@ add_action('wp_ajax_nopriv_process_single_use_link_demo_form', 'bz_process_singl
 function bz_process_single_use_demo_link_form()
 {
     $key = new SingleUseKey(array('expires' => '4 minutes', 'expired_message' => 'What took you so long? That link has totally moved on... try making another?'));
-    wp_mail($_POST['email'], 'Your single use link...', 'Here it is '.$get_bloginfo('url').'?single_use_key='.$key->key);
+    wp_mail($_POST['email'], 'Your single use link...', 'Here it is '.get_bloginfo('url').'?single_use_key='.$key->key);
     die();
 }
 
