@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WordPress Single Use Keys
-Plugin URI: https://github.com/beezee/WP-single-use-links
+Plugin URI: https://beezee.github.com/WP-single-use-links.html
 Description: Generate single use keys, (optionally with expiration date) for one-time links to give your visitors or registered users.
 Version: 0.1
 Author: Brian Zeligson
