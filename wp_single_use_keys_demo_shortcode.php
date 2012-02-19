@@ -36,7 +36,7 @@ function bz_single_use_link_process()
     <?php
     if ($_GET['single_use_key'])
     {
-        $consumer = new SingleUseKey(array('store' => false, "invalid_message' => 'Whoa there sparky! Looks like that link ain't legit..."));
+        $consumer = new SingleUseKey(array('store' => false, 'invalid_message' => "Whoa there sparky! Looks like that link ain't legit..."));
         $valid = $consumer->consume($_GET['single_use_key']);
         if ($valid == 'valid') $valid = 'Hey good work! That key has been consumed and this link won\'t work again';
         ?>
