@@ -159,3 +159,8 @@ This method accepts a key string, and returns any of the same three values retur
         $key = $_GET['key'];
         $validator = new SingleUseKey(array('store' => false));
         $valid = $validator->validate($key); //if key string matches a stored key, $valid equals 'valid', and the key remains in storage and can be used again, or consumed at a later time.
+        
+##Working Demo
+
+I've included a demo plugin in wp_single_use_keys_demo_shortcode.php. It's important to be aware that the overall implementation of this demo plugin is *very* quick and dirty, and in no way reflects overall WP plugin best practices, however
+lines 36 to 58 of the plugin clearly demonstrate how to utilize the single use keys class to generate one time use expiring links in just a few lines of code. You can see it in action [here](http://brianzeligson.com/single_use_keys/)
