@@ -3,7 +3,7 @@
 /*
 Plugin Name: WordPress Single Use Keys Example Shortcode
 Plugin URI: https://beezee.github.com/WP-single-use-links.html
-Description: Shortcode to generate a form which sends out single use links with 4 minute expiration to demo use of WP single use keys plugin - QUICK AND DIRTY
+Description: [single_use_demo_form] Shortcode to generate a form which sends out single use links with 4 minute expiration to demo use of WP single use keys plugin - QUICK AND DIRTY
 Version: 0.1
 Author: Brian Zeligson
 Author URI: http://beezee.github.com
@@ -32,6 +32,7 @@ function bz_single_use_link_process()
            }
         });
     </script>
+    <?php
     if ($_GET['single_use_key'])
     {
         $plugin_url = get_bloginfo('plugins_url').'/'.basename(dirname(__FILE__));
