@@ -36,18 +36,12 @@ function bz_single_use_link_process()
     <?php
     if ($_GET['single_use_key'])
     {
-        $peices = split('/', dirname(__FILE__));
-        $dirname = array_pop($peices);
-        $plugin_url = get_bloginfo('plugins_url').'/'.$dirname;
         $consumer = new SingleUseKey(array('store' => false, "invalid_message' => 'Whoa there sparky! Looks like that link ain't legit..."));
         $valid = $consumer->consume($_GET['single_use_key']);
         if ($valid == 'valid') $valid = 'Hey good work! That key has been consumed and this link won\'t work again';
-        $type = ($valid == 'valid') ? 'success' : 'error';
         ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo $plugin_url; ?>/noty/css/jquery.noty.css" />
-        <script type="text/javascript" src="<?php echo $plugin_url; ?>/noty/js/jquery.noty.js"
         <script type="text/javascript">
-        noty({"text":"<?php echo $valid; ?>","layout":"top","type":"<?php echo success; ?>","textAlign":"center","easing":"swing","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":"500","timeout":"5000","closable":true,"closeOnSelfClick":true});
+            alert('<?php echo $valid; ?>');
         </script>
         <?php
     }
