@@ -61,7 +61,7 @@ function bz_process_single_use_demo_link_form()
 }
 
 function write_single_use_link_demo_form( $atts ){
- return '<input id="single_use_key_demo_email" type="text" /><br /><input type="button" id="single_use_key_demo_form_submit" />';
+ return '<input id="single_use_key_demo_email" type="text" /><br /><input type="button" value="Send me a single use link" id="single_use_key_demo_form_submit" />';
 }
 add_shortcode( 'single_use_demo_form', 'write_single_use_link_demo_form' );
 
