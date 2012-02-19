@@ -14,6 +14,7 @@ add_action('wp_head', 'bz_single_use_link_process', 99);
 
 function bz_single_use_link_process()
 {
+    wp_enqueue_script('jquery');
     ?>
     <script type="text/javascript">
         jQuery('document').ready(function($) {
