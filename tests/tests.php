@@ -1,8 +1,8 @@
 <?php
 // Include the test framework
-require_once(dirname(__FILE__).'/../wp_single_use_keys.php');
 $wp_load_path = '/var/www/';
 if (!defined('ABSPATH')) require_once($wp_load_path.'wp-load.php');
+if (!class_exists('SingleUseKey')) require_once(dirname(__FILE__).'/../wp_single_use_keys.php');
 include('EnhanceTestFramework.php');
 
 class testUtilities
